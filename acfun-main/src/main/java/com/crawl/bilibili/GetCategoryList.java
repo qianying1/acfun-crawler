@@ -13,10 +13,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.crawl.util.FileUtil;
 import com.crawl.webchat.dao.BiliCategoryDao;
 import com.crawl.webchat.entity.param.BiliCategoryParam;
 import com.crawl.webchat.entity.po.BiliCategory;
-import com.crawl.webchat.util.FileUtil;
 
 
 public class GetCategoryList {

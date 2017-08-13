@@ -1,4 +1,4 @@
-package com.crawl.webchat.util;
+package com.crawl.util;
 
 import java.nio.charset.Charset;
 import java.util.Base64;

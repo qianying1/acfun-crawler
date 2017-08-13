@@ -13,11 +13,11 @@ import org.jsoup.nodes.Element;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.crawl.util.DateUtil;
+import com.crawl.util.StringUtils;
 import com.crawl.webchat.dao.WeiboWeekRankDao;
 import com.crawl.webchat.entity.param.WeiboWeekRankParam;
 import com.crawl.webchat.entity.po.WeiboWeekRank;
-import com.crawl.webchat.util.DateUtil;
-import com.crawl.webchat.util.StringUtils;
 
 public class ParseWeiboRank {
 

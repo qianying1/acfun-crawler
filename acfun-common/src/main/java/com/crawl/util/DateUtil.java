@@ -1,4 +1,4 @@
-package com.crawl.webchat.util;
+package com.crawl.util;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 /**
  * 用户中心日期工具类。

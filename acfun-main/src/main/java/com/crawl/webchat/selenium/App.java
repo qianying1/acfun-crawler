@@ -14,10 +14,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.crawl.util.DateUtil;
 import com.crawl.webchat.dao.NewRankDayDao;
 import com.crawl.webchat.entity.param.NewRankDayParam;
 import com.crawl.webchat.entity.po.NewRankDay;
-import com.crawl.webchat.util.DateUtil;
 
 /**
  * Hello world!

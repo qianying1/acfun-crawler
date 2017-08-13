@@ -13,6 +13,8 @@ import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.crawl.util.DateUtil;
+import com.crawl.util.StringUtils;
 import com.crawl.webchat.dao.NewRankDayDao;
 import com.crawl.webchat.dao.WxAccountDao;
 import com.crawl.webchat.dao.WxArticleDao;
@@ -22,8 +24,6 @@ import com.crawl.webchat.entity.param.WxArticleParam;
 import com.crawl.webchat.entity.po.NewRankDay;
 import com.crawl.webchat.entity.po.WxAccount;
 import com.crawl.webchat.entity.po.WxArticle;
-import com.crawl.webchat.util.DateUtil;
-import com.crawl.webchat.util.StringUtils;
 
 public class ParseAccount {
 

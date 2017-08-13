@@ -80,7 +80,7 @@
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
   	 	<!-- 注解dao，扫描dao目录下的所有dao -->
-		<property name="basePackage" value="com.crawl.webchat.dao" />
+		<property name="basePackage" value="com.crawl.bili.dao" />
 	</bean>
     
     <!-- TransactionManager -->

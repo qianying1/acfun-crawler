@@ -1,4 +1,4 @@
-package com.crawl.webchat.util;
+package com.crawl.util;
 
 /**
  * 日期格式枚举类。

@@ -1,4 +1,5 @@
-package com.crawl.webchat.util;
+package com.crawl.util;
+
 
 /**
  * 星期名称枚举类。

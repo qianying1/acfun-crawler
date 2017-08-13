@@ -14,11 +14,11 @@ import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.crawl.util.DateUtil;
+import com.crawl.util.StringUtils;
 import com.crawl.webchat.dao.PgcWeekRankDao;
 import com.crawl.webchat.entity.param.PgcWeekRankParam;
 import com.crawl.webchat.entity.po.PgcWeekRank;
-import com.crawl.webchat.util.DateUtil;
-import com.crawl.webchat.util.StringUtils;
 
 public class ParsePgcRank {
 

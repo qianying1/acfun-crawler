@@ -1,4 +1,4 @@
-package com.crawl.webchat.util;
+package com.crawl.util;
 
 
 import java.io.BufferedReader;
@@ -26,6 +26,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpConnectionParams;
@@ -61,6 +62,51 @@ public class HttpUtils {
                 e.printStackTrace();
             }
         }
+        try {
+            HttpResponse httpResponse = client.execute(post);
+            //if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(),charset));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+            //}else{
+            //    ResultObject responseContent=new ResultObject(ResultCode.SERVER_ERROR.toString(),ResultMessage.SERVER_ERROR);
+            //    response.append(JsonHelper.ObjToJsonStr(responseContent));
+            //}
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            post.releaseConnection();
+            client.getConnectionManager().shutdown();
+        }
+        return response.toString();
+    }
+    
+    public static String doPost(String url, Map<String, String> params, Map<String, String> headers, String charset) {
+        StringBuffer response = new StringBuffer();
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpPost post = new HttpPost(url);
+
+        List<NameValuePair> list = new ArrayList<NameValuePair>();
+        //设置Http Post数据
+        if (params != null) {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                list.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+            }
+            try {
+                post.setEntity(new UrlEncodedFormEntity(list, charset));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        if (headers != null){
+        	for (Map.Entry<String, String> entry : headers.entrySet()) {
+        		post.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        
         try {
             HttpResponse httpResponse = client.execute(post);
             //if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {

@@ -13,7 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.crawl.webchat.util.DateUtil;
+import com.crawl.util.DateUtil;
 
 /**
  * Hello world!

@@ -1,6 +1,6 @@
 package com.crawl.bilibili;
 
-import com.crawl.webchat.util.HttpUtils;
+import com.crawl.util.HttpUtils;
 
 public class UserVideoList {
 

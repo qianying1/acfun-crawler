@@ -1,4 +1,4 @@
-package com.crawl.webchat.util;
+package com.crawl.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -37,10 +37,14 @@ public class FileUtil {
 		return file;
 	}
 	
-	public static void filePutContent(String fileName, String content, String charset) throws Exception{
-		FileOutputStream fos = new FileOutputStream(fileName);
-		fos.write(content.getBytes(charset));
-		fos.close();
+	public static void filePutContent(String fileName, String content, String charset){
+		try {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			fos.write(content.getBytes(charset));
+			fos.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public static String getFileExtName(String name) {

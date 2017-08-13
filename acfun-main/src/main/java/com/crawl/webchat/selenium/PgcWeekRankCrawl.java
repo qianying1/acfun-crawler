@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.crawl.webchat.util.DateUtil;
-import com.crawl.webchat.util.FileUtil;
+import com.crawl.util.DateUtil;
+import com.crawl.util.FileUtil;
 
 /**
  * Hello world!

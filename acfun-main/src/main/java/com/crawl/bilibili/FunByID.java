@@ -21,7 +21,7 @@ import com.crawl.util.HttpUtils;
 
 
 
-public class FunList {
+public class FunByID {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring-dao.xml");
@@ -30,15 +30,18 @@ public class FunList {
 		//String topDir = "F:\\develop\\acfun\\acfun-main\\htmls\\video";		
 		List<BiliCategory> categoryList = biliCategoryDao.getCategoryList(false);
 		for (BiliCategory category: categoryList){
-			if (category.getId() == 131 || category.getId() <= 0){
+			if (category.getId() <= 0){
 				continue;
-			}
-			if (category.getId() != 96){
-				//continue;
 			}
 			crawlCategory(category.getId(), biliFunDao);
 		}
 	}
+	
+//	public BiliFun getByById(int aid){
+//		String url = "http://api.bilibili.com/archive_stat/stat?aid=" + aid;
+//		String content = HttpUtils.doGet(url, null, "utf-8");
+//		
+//	}
 	
 	public static int crawlCategory(int categoryId, BiliFunDao<BiliFun, BiliFunParam> biliFunDao){
 		String url = "https://api.bilibili.com/archive_rank/getarchiverankbypartion?tid=%d&pn=%d";
@@ -53,37 +56,19 @@ public class FunList {
 			
 			startPage = 2414;
 		}
-		
-		String fullUrl = String.format(url, categoryId, 1);
-		String content = HttpUtils.doGet(fullUrl, null, "utf-8");
-		JSONObject retData = new JSONObject(content);
-		int totalRecords = retData.getJSONObject("data").getJSONObject("page").getInt("count");
-		if (totalRecords % 20 > 0){
-			startPage = totalRecords / 20 + 1;
-		}else {
-			startPage = totalRecords / 20;
-		}
-		if (categoryId == 96){
-			startPage = 1184;
-		}
-		
-		//startPage = 359067 / 20 + 1;
-		
-		
-		
-		for (int pn = startPage; ; pn--){
-			fullUrl = String.format(url, categoryId, pn);
-			content = HttpUtils.doGet(fullUrl, null, "utf-8");
+		for (int pn = startPage; ; pn++){
+			String fullUrl = String.format(url, categoryId, pn);
+			String content = HttpUtils.doGet(fullUrl, null, "utf-8");
 			
 			String fileName = sDir + pn + ".json";
 			FileUtil.filePutContent(fileName, content, "utf-8");
 			
 			try {
-				//JSONObject retData = new JSONObject(content);
+				JSONObject retData = new JSONObject(content);
 //				if (!retData.has("data")){
 //					continue;
 //				}
-				retData = new JSONObject(content);
+				
 				JSONArray dataArray = retData.getJSONObject("data").getJSONArray("archives");
 				List<BiliFun> dataList = new ArrayList<BiliFun>();
 				for (int i = 0; i < dataArray.length(); i++) {

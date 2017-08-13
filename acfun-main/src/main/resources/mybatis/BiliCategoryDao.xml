@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.crawl.webchat.dao.BiliCategoryDao">
+<mapper namespace="com.crawl.bili.dao.BiliCategoryDao">
 
 	<!--实体映射-->
-	<resultMap id="base_result_map" type="com.crawl.webchat.entity.po.BiliCategory">
+	<resultMap id="base_result_map" type="com.crawl.bili.entity.po.BiliCategory">
 		<!---->
-		<id column="id" property="id"  />
+		<result column="id" property="id"  />
 		<!---->
 		<result column="name" property="name"  />
 		<!---->
@@ -25,7 +25,10 @@
 		 id,name,channel,pid,url,enName
 	</sql>
 
-	<sql id="base_condition_filed">			
+	<sql id="base_condition_filed">
+			<if test="id != null">
+				 and  id = #{id}
+			</if>
 			<if test="name != null and name!=''">
 				 and  name = #{name}
 			</if>
@@ -72,8 +75,8 @@
 	</delete>
 
 	<!-- 插入 （匹配有值的字段）-->
-	<insert id="insert" parameterType="com.crawl.webchat.entity.po.BiliCategory">
-		 INSERT ignore INTO bili_category
+	<insert id="insert" parameterType="com.crawl.bili.entity.po.BiliCategory">
+		 INSERT INTO bili_category
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="id != null">
 				 id,
@@ -117,7 +120,7 @@
 	</insert>
 
 	<!-- 添加 （批量插入）-->
-		<insert id="insertBatch" parameterType="com.crawl.webchat.entity.po.BiliCategory">
+		<insert id="insertBatch" parameterType="com.crawl.bili.entity.po.BiliCategory">
 		 INSERT INTO bili_category(id,name,channel,pid,url,enName)values
 			 <foreach collection="list" item="item" separator=",">
 			 (
@@ -127,9 +130,12 @@
 		</insert>
 
 	<!-- 修 改-->
-	<update id="update" parameterType="com.crawl.webchat.entity.po.BiliCategory">
+	<update id="update" parameterType="com.crawl.bili.entity.po.BiliCategory">
 		 UPDATE bili_category
- 		 <set>
+ 		 <set> 
+			<if test="id != null">
+				 id = #{id},
+			</if>
 			<if test="name != null">
 				 name = #{name},
 			</if>
@@ -146,7 +152,7 @@
 				 enName = #{enName},
 			</if>
  		 </set>
- 		 where id = #{id}
+ 		<include refid="base_condition" />
 	</update>
 
 	<!-- 根据PrimaryKey删除-->
@@ -171,6 +177,18 @@
 		 <if test="page!=null">
 			 limit #{page.start},#{page.end}
 		 </if>
+	</select>
+	
+	<select id="getCategoryList" resultMap="base_result_map" >
+		 SELECT <include refid="base_column_list" /> FROM bili_category
+		 <if test="top != null">
+			 <if test="top == true">
+				 where pid=0
+			 </if>
+			 <if test="top != true">
+				 where pid > 0
+			 </if>
+		 </if>		 
 	</select>
 
 	<!-- 查询数量-->
